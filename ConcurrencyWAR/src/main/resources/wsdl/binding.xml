@@ -1,0 +1,6 @@
+<bindings
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  wsdlLocation="globalweather.asmx.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+  <enableWrapperStyle>true</enableWrapperStyle>       
+</bindings>
