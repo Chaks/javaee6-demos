@@ -4,9 +4,11 @@
  */
 package com.mycompany.servlet;
 
-import com.mycompany.entity.Customer;
-import com.mycompany.worker.CustomerWorker;
+import com.mycompany.entity.City;
+import com.mycompany.entity.Country;
+import com.mycompany.entity.CountryLanguage;
 import com.mycompany.worker.WeatherWorker;
+import com.mycompany.worker.WorldWorker;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -29,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 
   @Inject
-  CustomerWorker customerWorker;
+  WorldWorker worldWorker;
   @Inject
   WeatherWorker weatherWorker;
 
@@ -56,10 +58,17 @@ public class TestServlet extends HttpServlet {
       out.println("<body>");
       out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
 
-      Future<List<Customer>> asyncCustomers = customerWorker.getCustomersAsync();
+      Future<List<City>> asyncCities = worldWorker.getCitiesAsync();
+      Future<List<Country>> asyncCountries = worldWorker.getCountriesAsync();
+      Future<List<CountryLanguage>> asyncLanguages = worldWorker.getLanguagesAsync();
+
       Future<String> asyncString = weatherWorker.getWeatherAsync("India", "Bombay");
       try {
-        out.println("Customers: " + asyncCustomers.get());
+        out.println("Cities: " + asyncCities.get().size());
+        out.println("</br>");
+        out.println("Countries: " + asyncCountries.get().size());
+        out.println("</br>");
+        out.println("Languages: " + asyncLanguages.get().size());
         out.println("</br>");
         out.println("Weather: " + asyncString.get());
       } catch (InterruptedException ex) {
@@ -67,7 +76,7 @@ public class TestServlet extends HttpServlet {
       } catch (ExecutionException ex) {
         Logger.getLogger(TestServlet.class.getName()).log(Level.SEVERE, null, ex);
       }
-      
+
       out.println("</body>");
       out.println("</html>");
     } finally {
