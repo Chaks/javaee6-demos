@@ -10,6 +10,8 @@ import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.inject.Inject;
+import javax.xml.ws.BindingProvider;
 import net.webservicex.GlobalWeather;
 import net.webservicex.GlobalWeatherSoap;
 
@@ -21,9 +23,16 @@ import net.webservicex.GlobalWeatherSoap;
 @TransactionManagement(TransactionManagementType.BEAN)
 public class WeatherWorker {
 
+  @Inject
+  GlobalWeather globalWeather;
+
   public String getWeather(String country, String city) {
-    GlobalWeather globalWeather = new GlobalWeather();
     GlobalWeatherSoap globalWeatherSoap = globalWeather.getGlobalWeatherSoap();
+
+    BindingProvider bindingProvider = (BindingProvider) globalWeatherSoap;
+    bindingProvider.getRequestContext().put(
+            BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://localhost:6789/globalweather.asmx");
+
     return globalWeatherSoap.getWeather(city, country);
   }
 
