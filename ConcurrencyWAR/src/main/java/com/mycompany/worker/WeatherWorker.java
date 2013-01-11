@@ -47,7 +47,7 @@ public class WeatherWorker {
     try {
       Thread.sleep(milliSeconds);
     } catch (InterruptedException ex) {
-      Logger.getLogger(WorldWorker.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(WeatherWorker.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 }
