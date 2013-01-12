@@ -5,7 +5,9 @@
 package com.mycompany.servlet;
 
 import com.mycompany.worker.WeatherWorker;
-import com.mycompany.worker.WorldWorker;
+import com.mycompany.worker.WorldCityWorker;
+import com.mycompany.worker.WorldCountryWorker;
+import com.mycompany.worker.WorldLanguageWorker;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Inject;
@@ -23,7 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet2 extends HttpServlet {
 
   @Inject
-  WorldWorker worldWorker;
+  WorldCityWorker worldCityWorker;
+  @Inject
+  WorldCountryWorker worldCountryWorker;
+  @Inject
+  WorldLanguageWorker worldLanguageWorker;
   @Inject
   WeatherWorker weatherWorker;
 
@@ -50,11 +56,11 @@ public class TestServlet2 extends HttpServlet {
       out.println("<body>");
       out.println("<h1>Servlet TestServlet2 at " + request.getContextPath() + "</h1>");
 
-      out.println("Cities: " + worldWorker.getCities().size());
+      out.println("Cities: " + worldCityWorker.getCities().size());
       out.println("</br>");
-      out.println("Countries: " + worldWorker.getCountries().size());
+      out.println("Countries: " + worldCountryWorker.getCountries().size());
       out.println("</br>");
-      out.println("Languages: " + worldWorker.getLanguages().size());
+      out.println("Languages: " + worldLanguageWorker.getLanguages().size());
       out.println("</br>");
       out.println("Weather: " + weatherWorker.getWeather("India", "Bombay"));
 

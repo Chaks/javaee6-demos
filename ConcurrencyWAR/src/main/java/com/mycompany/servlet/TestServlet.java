@@ -8,7 +8,9 @@ import com.mycompany.entity.City;
 import com.mycompany.entity.Country;
 import com.mycompany.entity.CountryLanguage;
 import com.mycompany.worker.WeatherWorker;
-import com.mycompany.worker.WorldWorker;
+import com.mycompany.worker.WorldCityWorker;
+import com.mycompany.worker.WorldCountryWorker;
+import com.mycompany.worker.WorldLanguageWorker;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -31,7 +33,11 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 
   @Inject
-  WorldWorker worldWorker;
+  WorldCityWorker worldCityWorker;
+  @Inject
+  WorldCountryWorker worldCountryWorker;
+  @Inject
+  WorldLanguageWorker worldLanguageWorker;
   @Inject
   WeatherWorker weatherWorker;
 
@@ -58,9 +64,9 @@ public class TestServlet extends HttpServlet {
       out.println("<body>");
       out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
 
-      Future<List<City>> asyncCities = worldWorker.getCitiesAsync();
-      Future<List<Country>> asyncCountries = worldWorker.getCountriesAsync();
-      Future<List<CountryLanguage>> asyncLanguages = worldWorker.getLanguagesAsync();
+      Future<List<City>> asyncCities = worldCityWorker.getCitiesAsync();
+      Future<List<Country>> asyncCountries = worldCountryWorker.getCountriesAsync();
+      Future<List<CountryLanguage>> asyncLanguages = worldLanguageWorker.getLanguagesAsync();
 
       Future<String> asyncString = weatherWorker.getWeatherAsync("India", "Bombay");
       try {
