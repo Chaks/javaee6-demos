@@ -19,7 +19,7 @@ import org.javasimon.SimonManager;
 @Interceptor
 public class AggregateInterceptor {
 
-  public static final String DEFAULT_INTERCEPTOR_PREFIX = "org.javasimon.business";
+  private static final String DEFAULT_INTERCEPTOR_PREFIX = "org.javasimon.business";
 
   @AroundInvoke
   public Object aggregate(InvocationContext invocationContext) throws Exception {
