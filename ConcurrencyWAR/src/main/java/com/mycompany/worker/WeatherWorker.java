@@ -4,6 +4,7 @@
  */
 package com.mycompany.worker;
 
+import com.mycompany.perfmonitor.interceptor.Stopwatchable;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ import net.webservicex.GlobalWeatherSoap;
  */
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
+@Stopwatchable
 public class WeatherWorker {
 
   @Inject

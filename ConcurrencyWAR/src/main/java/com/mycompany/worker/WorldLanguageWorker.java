@@ -6,6 +6,7 @@ package com.mycompany.worker;
 
 import com.mycompany.entity.CountryLanguage;
 import com.mycompany.entity.controller.CountryLanguageJpaController;
+import com.mycompany.perfmonitor.interceptor.Stopwatchable;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ import javax.transaction.UserTransaction;
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
+@Stopwatchable
 public class WorldLanguageWorker {
 
   @PersistenceContext(unitName = "com.mycompany.demo_ConcurrencyWAR_war_1.0-SNAPSHOTPU")
