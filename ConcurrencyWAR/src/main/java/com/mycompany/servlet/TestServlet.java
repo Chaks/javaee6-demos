@@ -4,20 +4,9 @@
  */
 package com.mycompany.servlet;
 
-import com.mycompany.entity.City;
-import com.mycompany.entity.Country;
-import com.mycompany.entity.CountryLanguage;
-import com.mycompany.worker.WeatherWorker;
-import com.mycompany.worker.WorldCityWorker;
-import com.mycompany.worker.WorldCountryWorker;
-import com.mycompany.worker.WorldLanguageWorker;
+import com.mycompany.processor.TestProcessor;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,13 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 
   @Inject
-  WorldCityWorker worldCityWorker;
-  @Inject
-  WorldCountryWorker worldCountryWorker;
-  @Inject
-  WorldLanguageWorker worldLanguageWorker;
-  @Inject
-  WeatherWorker weatherWorker;
+  TestProcessor testProcessor;
 
   /**
    * Processes requests for both HTTP
@@ -64,25 +47,15 @@ public class TestServlet extends HttpServlet {
       out.println("<body>");
       out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
 
-      Future<List<City>> asyncCities = worldCityWorker.getCitiesAsync();
-      Future<List<Country>> asyncCountries = worldCountryWorker.getCountriesAsync();
-      Future<List<CountryLanguage>> asyncLanguages = worldLanguageWorker.getLanguagesAsync();
+      testProcessor.process(request, response);
 
-      Future<String> asyncString = weatherWorker.getWeatherAsync("India", "Bombay");
-      try {
-        out.println("Cities: " + asyncCities.get().size());
-        out.println("</br>");
-        out.println("Countries: " + asyncCountries.get().size());
-        out.println("</br>");
-        out.println("Languages: " + asyncLanguages.get().size());
-        out.println("</br>");
-        out.println("Weather: " + asyncString.get());
-      } catch (InterruptedException ex) {
-        Logger.getLogger(TestServlet.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (ExecutionException ex) {
-        Logger.getLogger(TestServlet.class.getName()).log(Level.SEVERE, null, ex);
-      }
-
+      out.println("asyncCities: " + request.getAttribute("asyncCities"));
+      out.println("</br>");
+      out.println("asyncCountries: " + request.getAttribute("asyncCountries"));
+      out.println("</br>");
+      out.println("asyncLanguages: " + request.getAttribute("asyncLanguages"));
+      out.println("</br>");
+      out.println("asyncString: " + request.getAttribute("asyncString"));
       out.println("</body>");
       out.println("</html>");
     } finally {
