@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -24,6 +26,7 @@ import net.webservicex.GlobalWeatherSoap;
  */
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
+@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @Stopwatchable
 public class WeatherWorker {
 
