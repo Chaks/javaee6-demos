@@ -41,7 +41,7 @@ public class WorldLanguageWorker {
   public List<CountryLanguage> getLanguages() {
     CountryLanguageJpaController countryLanguageJpaController =
             new CountryLanguageJpaController(userTransaction, entityManager.getEntityManagerFactory());
-    insertDealy(1500);
+    insertDealy(0);
     return countryLanguageJpaController.findCountryLanguageEntities();
   }
 

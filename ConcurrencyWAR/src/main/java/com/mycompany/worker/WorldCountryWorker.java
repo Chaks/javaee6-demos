@@ -41,7 +41,7 @@ public class WorldCountryWorker {
   public List<Country> getCountries() {
     CountryJpaController countryJpaController =
             new CountryJpaController(userTransaction, entityManager.getEntityManagerFactory());
-    insertDealy(1500);
+    insertDealy(0);
     return countryJpaController.findCountryEntities();
   }
 

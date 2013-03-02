@@ -41,7 +41,7 @@ public class WorldCityWorker {
   public List<City> getCities() {
     CityJpaController cityJpaController =
             new CityJpaController(userTransaction, entityManager.getEntityManagerFactory());
-    insertDealy(1500);
+    insertDealy(0);
     return cityJpaController.findCityEntities();
   }
 

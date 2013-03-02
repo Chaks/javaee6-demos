@@ -39,7 +39,7 @@ public class WeatherWorker {
     BindingProvider bindingProvider = (BindingProvider) globalWeatherSoap;
     bindingProvider.getRequestContext().put(
             BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://localhost:6789/globalweather.asmx");
-    insertDealy(1500);
+    insertDealy(0);
     return globalWeatherSoap.getWeather(city, country);
   }
 
