@@ -35,7 +35,7 @@ public class WorldLanguageWorker implements Callable<List<CountryLanguage>> {
   public List<CountryLanguage> call() throws Exception {
     CountryLanguageJpaController countryLanguageJpaController =
             new CountryLanguageJpaController(userTransaction, entityManager.getEntityManagerFactory());
-    insertDealy(1500);
+    insertDealy(0);
     return countryLanguageJpaController.findCountryLanguageEntities();
   }
 

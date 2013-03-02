@@ -31,7 +31,7 @@ public class WorldCityWorker implements Callable<List<City>> {
   public List<City> call() throws Exception {
     CityJpaController cityJpaController =
             new CityJpaController(userTransaction, entityManager.getEntityManagerFactory());
-    insertDealy(1500);
+    insertDealy(0);
     return cityJpaController.findCityEntities();
   }
 

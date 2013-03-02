@@ -35,7 +35,7 @@ public class WorldCountryWorker implements Callable<List<Country>> {
   public List<Country> call() throws Exception {
     CountryJpaController countryJpaController =
             new CountryJpaController(userTransaction, entityManager.getEntityManagerFactory());
-    insertDealy(1500);
+    insertDealy(0);
     return countryJpaController.findCountryEntities();
   }
 
